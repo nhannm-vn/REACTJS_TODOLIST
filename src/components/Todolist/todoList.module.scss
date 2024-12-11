@@ -1,0 +1,16 @@
+.todolist {
+  border: 2px solid black;
+  padding: 3rem;
+}
+
+.todolistContainer {
+  border: 2px solid green;
+  background-color: #fff;
+  max-width: 40rem; //400px
+  padding: 2rem;
+  // đánh ra giữa
+  margin: 0 auto;
+  border-radius: 1rem;
+  // đổ bóng
+  box-shadow: 5px 6px 6px rgb(0 0 0 / 24%);
+}
