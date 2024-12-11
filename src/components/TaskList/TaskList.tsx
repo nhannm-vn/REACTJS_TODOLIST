@@ -1,9 +1,14 @@
+import { TaskListProps } from '../../@types/props.types'
 import styles from './taskList.module.scss'
 
-function TaskList() {
+// *Lưu ý ở đây nếu như để props không thì nó sẽ bị lỗi
+//do sự nghiêm khắc của ts. Nên mình cần interface
+function TaskList(props: TaskListProps) {
+  const { doneTaskList } = props
+
   return (
     <div className='mb-2'>
-      <h1 className={styles.title}>Hoan thanh</h1>
+      <h1 className={styles.title}>{doneTaskList ? 'Hoàn thành' : 'Chưa hoàn thành'}</h1>
       <div className={styles.tasks}>
         <div className={styles.task}>
           <input className={styles.taskCheckbox} type='checkbox' />
