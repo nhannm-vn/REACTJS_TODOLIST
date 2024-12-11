@@ -1,4 +1,5 @@
 import TaskInput from '../TaskInput'
+import TaskList from '../TaskList'
 import styles from './todoList.module.scss'
 
 function Todolist() {
@@ -6,6 +7,8 @@ function Todolist() {
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
         <TaskInput />
+        <TaskList />
+        <TaskList />
       </div>
     </div>
   )

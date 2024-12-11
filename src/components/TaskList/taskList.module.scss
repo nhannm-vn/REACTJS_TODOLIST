@@ -1,0 +1,46 @@
+.title {
+  margin: 2rem 0;
+  font-size: 3rem;
+}
+
+.task {
+  display: flex;
+  align-items: flex-start;
+  //không phải item cuối cùng thì mình cho giữ chúng nó có tí khoảng cách
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+}
+
+.taskCheckbox {
+  flex: 0 0 10%;
+  height: 2rem;
+  margin-top: 0.5rem;
+}
+
+.taskName {
+  flex: 0 0 70%;
+  max-width: 70%;
+  padding: 0 0 0.5rem;
+  color: #383f50;
+  //Trường hợp nó có thêm class này thì cho màu nhạt lại
+  &.taskNameDone {
+    color: #b2b7bb;
+    text-decoration: line-through;
+  }
+}
+
+//flex: 0 0 70%; đảm bảo rằng phần tử sẽ chiếm chính xác 70% không gian container
+
+.taskActions {
+  flex: 0 0 20%;
+  max-width: 20%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.taskBtn {
+  flex: 0 0 3.5rem;
+  max-width: 3.5rem;
+  font-size: 1.8rem;
+}
