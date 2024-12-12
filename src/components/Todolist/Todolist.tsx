@@ -114,6 +114,31 @@ function Todolist() {
     setCurrentTodo(null)
   }
 
+  //_Chức năng delete todo
+  const deleteTodo = (id: string) => {
+    //_Có trường hợp đang bấm edit và lại bấm vào cái nút thùng rác
+    //thì khi đó mình sẽ xóa sạch hết nội dung ở trên ô input luôn. Muốn như vậy thì phải set currentTodo về null
+    if (currentTodo) {
+      setCurrentTodo(null)
+    }
+
+    //_duyệt xem trong todos có thằng nào có id giống với id của thằng cần xóa không
+    //thì cho nó biến mất khỏi todos
+    setTodos((prev) => {
+      const findedIndexTodo = prev.findIndex((todo) => todo.id === id)
+      //_Nếu như tìm thấy thì mới xóa
+      if (findedIndexTodo > -1) {
+        //_Lưu ý nên clone prev ra trước khi xóa
+        const result = [...prev]
+        // xóa 1 phần tử từ cị trí tìm thấy
+        result.splice(findedIndexTodo, 1)
+        return result
+      }
+      //_Nếu như không tìm thấy thì ta không làm gì cả
+      return prev
+    })
+  }
+
   return (
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
@@ -128,12 +153,14 @@ function Todolist() {
           todos={notdoneTodos}
           handleDoneTodo={handleDoneTodo}
           startEditTodo={startEditTodo}
+          deleteTodo={deleteTodo}
         />
         <TaskList
           doneTaskList={true} //
           todos={doneTodos}
           handleDoneTodo={handleDoneTodo}
           startEditTodo={startEditTodo}
+          deleteTodo={deleteTodo}
         />
       </div>
     </div>

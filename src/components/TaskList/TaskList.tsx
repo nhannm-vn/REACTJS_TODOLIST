@@ -4,7 +4,7 @@ import styles from './taskList.module.scss'
 // *Lưu ý ở đây nếu như để props không thì nó sẽ bị lỗi
 //do sự nghiêm khắc của ts. Nên mình cần interface
 function TaskList(props: TaskListProps) {
-  const { doneTaskList, todos, handleDoneTodo, startEditTodo } = props
+  const { doneTaskList, todos, handleDoneTodo, startEditTodo, deleteTodo } = props
 
   //_truyền hàm set lại check done thì cũng được. Tuy nhiên thì
   //mình muốn cho nó nghệ tí thì viết thêm cái hàm
@@ -36,7 +36,14 @@ function TaskList(props: TaskListProps) {
               >
                 🖋️
               </button>
-              <button className={styles.taskBtn}>🗑️</button>
+              <button
+                className={styles.taskBtn}
+                onClick={() => {
+                  deleteTodo(todo.id)
+                }}
+              >
+                🗑️
+              </button>
             </div>
           </div>
         ))}
