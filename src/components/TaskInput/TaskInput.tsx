@@ -8,7 +8,7 @@ function TaskInput(props: TaskInputProps) {
   //liệu thay đổi thì nó render ra cùng lúc
   const [name, setName] = useState<string>('')
 
-  const { addTodo, currentTodo } = props
+  const { addTodo, currentTodo, editTodo } = props
 
   //_hàm bắt sự kiện khi bấm submit thì chạy hàm addTodo nhằm thêm sản phẩm vào
   //todos. Đây là sự kiện của toàn form
@@ -27,8 +27,16 @@ function TaskInput(props: TaskInputProps) {
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     //_Lấy value hiện tại của ô input
     const { value } = event.target
-    //_setState lại
-    setName(value)
+
+    //_Nếu như có currentTodo nghĩa là đang muốn edit thì khi
+    //onChange sẽ thay đổi đồng thời giá trị name cho currentTodo từ đó có thể
+    //render ra lại trên ô input ==> nhờ như vậy khi bấm nút chỉnh nó mởi cho edit trên ô input
+    if (currentTodo) {
+      editTodo(value)
+    } else {
+      //_Còn nếu là trạng thái bình thường thì setState name lại thôi
+      setName(value)
+    }
   }
 
   return (

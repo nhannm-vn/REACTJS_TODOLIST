@@ -73,12 +73,34 @@ function Todolist() {
     }
   }
 
+  //_sau khi bấm cây bút rồi thì bắt đầu gõ phím
+  //và edit nội dung. Chính vì vậy mà nó sẽ set cái name của
+  //currentTodo lại. Nghĩa là lấy nội dung ở trạng thái edit và set lại
+  //cho currentTodo
+  //_Lưu ý code mấy cái này sợ null lắm. Nên cần check coi thử bản thân thằng currentTodo có giá
+  //trị hay không, nếu như null nghĩa là trạng thái add thì không có set làm gì
+  const editTodo = (name: string) => {
+    setCurrentTodo((prevState) => {
+      //nếu như có
+      if (prevState) {
+        return {
+          ...prevState,
+          name
+        }
+      } else {
+        //nếu như không có thì trả ra null(trạng thái cũ nghĩa là đang add) coi như không có gì
+        return null
+      }
+    })
+  }
+
   return (
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
         <TaskInput
           addTodo={addTodo} //
           currentTodo={currentTodo}
+          editTodo={editTodo}
         />
         <TaskList
           doneTaskList={false} //

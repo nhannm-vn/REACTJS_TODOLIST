@@ -12,4 +12,5 @@ export interface TaskListProps {
 export interface TaskInputProps {
   addTodo: (name: string) => void
   currentTodo: Todo | null
+  editTodo: (name: string) => void
 }
