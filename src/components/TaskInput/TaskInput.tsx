@@ -8,7 +8,7 @@ function TaskInput(props: TaskInputProps) {
   //liệu thay đổi thì nó render ra cùng lúc
   const [name, setName] = useState<string>('')
 
-  const { addTodo } = props
+  const { addTodo, currentTodo } = props
 
   //_hàm bắt sự kiện khi bấm submit thì chạy hàm addTodo nhằm thêm sản phẩm vào
   //todos. Đây là sự kiện của toàn form
@@ -38,10 +38,13 @@ function TaskInput(props: TaskInputProps) {
         <input
           type='text' //
           placeholder='caption goes here'
-          value={name}
+          // nếu đang ở chế độ edit thì hiển thị name của cái todo đang lưu trong
+          //currentTodo ra còn nếu không có gì thì cứ render ra name(value) của ô input
+          value={currentTodo ? currentTodo.name : name}
           onChange={onChangeInput}
         />
-        <button type='submit'>➕</button>
+        {/* tùy thuộc vào edit hay là add mà icon cũng khác nhau */}
+        <button type='submit'>{currentTodo ? '✔️' : '➕'}</button>
       </form>
     </div>
   )

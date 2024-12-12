@@ -6,8 +6,10 @@ export interface TaskListProps {
   doneTaskList: boolean
   todos: Todo[]
   handleDoneTodo: (id: string, done: boolean) => void
+  startEditTodo: (id: string) => void
 }
 
 export interface TaskInputProps {
   addTodo: (name: string) => void
+  currentTodo: Todo | null
 }
