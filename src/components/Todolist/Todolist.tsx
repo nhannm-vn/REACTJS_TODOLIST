@@ -3,6 +3,20 @@ import TaskInput from '../TaskInput'
 import TaskList from '../TaskList'
 import styles from './todoList.module.scss'
 import { Todo } from '../../@types/todo.type'
+import { HandleNewTodos } from '../../@types/handle.type'
+
+//_func nhận vào callback và thực hiện các item theo chức năng đó
+//và sau đó lấy dữ liệu từ localStorage xuống sau đó biến tấu và đẩy lên lại
+const syncReactToLocal = (handleNewTodos: HandleNewTodos) => {
+  //_Lấy danh sách từ localStorage xuống
+  const todosString = localStorage.getItem('todos')
+  //_Biến đổi thành mảng chứa các object hoặc nếu lấy về là null thì đưa về thành []
+  const todosObj = JSON.parse(todosString || '[]')
+  //_Biến đổi bằng cái hàm nhận vào
+  const newTodosObj = handleNewTodos(todosObj)
+  //_Kết quả được cái mảng mới và update lên localStorage
+  localStorage.setItem('todos', JSON.stringify(newTodosObj))
+}
 
 function Todolist() {
   //_Tạo state
