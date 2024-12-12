@@ -48,6 +48,7 @@ function Todolist() {
       return [...todoArr, todo]
     }
     setTodos(handler)
+    syncReactToLocal(handler)
   }
 
   //_Method này giúp cho mình khi tick vào cái ô check
@@ -68,6 +69,7 @@ function Todolist() {
       })
     }
     setTodos(handler)
+    syncReactToLocal(handler)
   }
 
   //_method này giúp khi chúng ta click vào cây bút thì nó
@@ -124,6 +126,7 @@ function Todolist() {
     //_Và nếu edit rồi thì mình sẽ đưa currentTodo về null nghĩa là quay lại trạng thái add
     //để chuẩn bị cho những lần tiếp theo
     setCurrentTodo(null)
+    syncReactToLocal(handler)
   }
 
   //_Chức năng delete todo
@@ -149,6 +152,7 @@ function Todolist() {
     }
 
     setTodos(handler)
+    syncReactToLocal(handler)
   }
 
   return (
