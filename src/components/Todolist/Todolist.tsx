@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import TaskInput from '../TaskInput'
 import TaskList from '../TaskList'
 import styles from './todoList.module.scss'
@@ -32,6 +32,18 @@ function Todolist() {
   //_Ở đây sẽ có 2 list dành cho hoàn thành và chưa hoàn thành
   const doneTodos = todos.filter((todo) => todo.done)
   const notdoneTodos = todos.filter((todo) => !todo.done)
+
+  //_Chúng ta muốn render web mà không mất dữ liệu
+  //thì chúng ta sẽ xài useEffect để set dữ liệu từ trong local cho state todos
+  //*Kết luận: flow => biến đổi trên UI xong và lưu sự biến đổi đó vào local
+  //để khi render ra lại thì đem cái biến đổi đó bỏ vào trong các state để hiện thị ra
+  //nghĩa là biến đổi gì thì cũng đồng bộ với local để khi render ra lấy từ local ra đúng chuẩn
+  useEffect(() => {
+    const todosString = localStorage.getItem('todos')
+    const todosObj: Todo[] = JSON.parse(todosString || '[]')
+    //set todos lại
+    setTodos(todosObj)
+  }, [])
 
   //_func giúp mình add sản phẩm vào list
   //func này sẽ nhận vào name và setState todos lại
