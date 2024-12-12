@@ -32,6 +32,25 @@ function Todolist() {
     })
   }
 
+  //_Method này giúp cho mình khi tick vào cái ô check
+  //thì nó sẽ hiển thị trạng thái check chưa để render ra
+  //nghĩa là nó sẽ set lại thuộc tính done của phần tử todo bị click
+  //method này cần truyền vào id để định danh và thêm trạng thái định danh
+  const handleDoneTodo = (id: string, done: boolean) => {
+    setTodos((prevState) => {
+      return prevState.map((todo) => {
+        if (todo.id === id) {
+          return {
+            ...todo,
+            done
+          }
+        } else {
+          return todo
+        }
+      })
+    })
+  }
+
   return (
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
@@ -39,10 +58,12 @@ function Todolist() {
         <TaskList
           doneTaskList={false} //
           todos={notdoneTodos}
+          handleDoneTodo={handleDoneTodo}
         />
         <TaskList
           doneTaskList={true} //
           todos={doneTodos}
+          handleDoneTodo={handleDoneTodo}
         />
       </div>
     </div>
