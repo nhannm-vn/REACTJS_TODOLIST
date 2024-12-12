@@ -36,8 +36,14 @@ function Todolist() {
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
         <TaskInput addTodo={addTodo} />
-        <TaskList doneTaskList={false} />
-        <TaskList doneTaskList={true} />
+        <TaskList
+          doneTaskList={false} //
+          todos={notdoneTodos}
+        />
+        <TaskList
+          doneTaskList={true} //
+          todos={doneTodos}
+        />
       </div>
     </div>
   )
