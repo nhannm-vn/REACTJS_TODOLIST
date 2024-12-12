@@ -24,20 +24,16 @@ function Todolist() {
   //nghĩa là khi bấm dấu cộng nó sẽ lấy name(value của input)
   //tạo ra object và set vào trong state
   const addTodo = (name: string) => {
-    // chặn add ''
-    if (name !== '') {
-      const todo: Todo = {
-        name,
-        //lúc đầu chưa có check gì hết khi mới thêm vào nên trạng thái mặc định là false
-        done: false,
-        id: new Date().toISOString()
-      }
-
-      //thêm todo mới vào mảng todos bằng cách setState
-      setTodos((prev) => {
-        return [...prev, todo]
-      })
+    const todo: Todo = {
+      name,
+      //lúc đầu chưa có check gì hết khi mới thêm vào nên trạng thái mặc định là false
+      done: false,
+      id: new Date().toISOString()
     }
+    const handler = (todoArr: Todo[]) => {
+      return [...todoArr, todo]
+    }
+    setTodos(handler)
   }
 
   //_Method này giúp cho mình khi tick vào cái ô check
@@ -45,8 +41,8 @@ function Todolist() {
   //nghĩa là nó sẽ set lại thuộc tính done của phần tử todo bị click
   //method này cần truyền vào id để định danh và thêm trạng thái định danh
   const handleDoneTodo = (id: string, done: boolean) => {
-    setTodos((prevState) => {
-      return prevState.map((todo) => {
+    const handler = (todoArr: Todo[]) => {
+      return todoArr.map((todo) => {
         if (todo.id === id) {
           return {
             ...todo,
@@ -56,7 +52,8 @@ function Todolist() {
           return todo
         }
       })
-    })
+    }
+    setTodos(handler)
   }
 
   //_method này giúp khi chúng ta click vào cây bút thì nó
