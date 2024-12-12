@@ -97,14 +97,15 @@ function Todolist() {
   //cập nhật thằng currentTodo đè lên thằng todo có id giống nó
   //==> mục đích là để cập nhật lại list danh sách và hiển thị ra
   const finishEditTodo = () => {
-    setTodos((prev) => {
-      return prev.map((todo) => {
+    const handler = (todoArr: Todo[]) => {
+      return todoArr.map((todo) => {
         //_Lưu ý vì currentTodo có thể null nên
         //cần optional chain để tránh crash app. Khi có null thì nó sẽ lập tức thành undefined
         if (todo.id === currentTodo?.id) return currentTodo
         else return todo
       })
-    })
+    }
+    setTodos(handler)
 
     //_Và nếu edit rồi thì mình sẽ đưa currentTodo về null nghĩa là quay lại trạng thái add
     //để chuẩn bị cho những lần tiếp theo
@@ -119,21 +120,21 @@ function Todolist() {
       setCurrentTodo(null)
     }
 
-    //_duyệt xem trong todos có thằng nào có id giống với id của thằng cần xóa không
-    //thì cho nó biến mất khỏi todos
-    setTodos((prev) => {
-      const findedIndexTodo = prev.findIndex((todo) => todo.id === id)
+    const handler = (todoArr: Todo[]) => {
+      const findedIndexTodo = todoArr.findIndex((todo) => todo.id === id)
       //_Nếu như tìm thấy thì mới xóa
       if (findedIndexTodo > -1) {
         //_Lưu ý nên clone prev ra trước khi xóa
-        const result = [...prev]
+        const result = [...todoArr]
         // xóa 1 phần tử từ cị trí tìm thấy
         result.splice(findedIndexTodo, 1)
         return result
       }
       //_Nếu như không tìm thấy thì ta không làm gì cả
-      return prev
-    })
+      return todoArr
+    }
+
+    setTodos(handler)
   }
 
   return (
