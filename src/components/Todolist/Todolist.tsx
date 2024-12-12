@@ -94,6 +94,26 @@ function Todolist() {
     })
   }
 
+  //_trong trạng thái edit thì
+  //_method này giúp ta duyệt lần lượt qua các todo con trong list và xem
+  //thử coi todo con nào có id giống với id của currentTodo thì mình sẽ cập nhật
+  //cập nhật thằng currentTodo đè lên thằng todo có id giống nó
+  //==> mục đích là để cập nhật lại list danh sách và hiển thị ra
+  const finishEditTodo = () => {
+    setTodos((prev) => {
+      return prev.map((todo) => {
+        //_Lưu ý vì currentTodo có thể null nên
+        //cần optional chain để tránh crash app. Khi có null thì nó sẽ lập tức thành undefined
+        if (todo.id === currentTodo?.id) return currentTodo
+        else return todo
+      })
+    })
+
+    //_Và nếu edit rồi thì mình sẽ đưa currentTodo về null nghĩa là quay lại trạng thái add
+    //để chuẩn bị cho những lần tiếp theo
+    setCurrentTodo(null)
+  }
+
   return (
     <div className={styles.todolist}>
       <div className={styles.todolistContainer}>
@@ -101,6 +121,7 @@ function Todolist() {
           addTodo={addTodo} //
           currentTodo={currentTodo}
           editTodo={editTodo}
+          finishEditTodo={finishEditTodo}
         />
         <TaskList
           doneTaskList={false} //
