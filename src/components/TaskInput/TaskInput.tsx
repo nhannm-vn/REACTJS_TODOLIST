@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { TaskInputProps } from '../../@types/props.types'
 import styles from './taskInput.module.scss'
+import { TodoTypes } from '../../PropTypes/todo.proptypes'
 function TaskInput(props: TaskInputProps) {
   //_tạo state name để có chỗ mà lưu trữ giá trị của
   //value ô input cũng như đảm bảo dữ liệu được hiện ra chính xác
@@ -62,6 +64,13 @@ function TaskInput(props: TaskInputProps) {
       </form>
     </div>
   )
+}
+
+TaskInput.propTypes = {
+  addTodo: PropTypes.func.isRequired,
+  currentTodo: PropTypes.oneOfType([TodoTypes, PropTypes.oneOf([null])]),
+  editTodo: PropTypes.func.isRequired,
+  finishEditTodo: PropTypes.func.isRequired
 }
 
 export default TaskInput
