@@ -1,5 +1,7 @@
+import PropTypes from 'prop-types'
 import { TaskListProps } from '../../@types/props.types'
 import styles from './taskList.module.scss'
+import { TodoTypes } from '../../PropTypes/todo.proptypes'
 
 // *Lưu ý ở đây nếu như để props không thì nó sẽ bị lỗi
 //do sự nghiêm khắc của ts. Nên mình cần interface
@@ -50,6 +52,14 @@ function TaskList(props: TaskListProps) {
       </div>
     </div>
   )
+}
+
+TaskList.propTypes = {
+  doneTaskList: PropTypes.bool.isRequired,
+  todos: PropTypes.arrayOf(TodoTypes),
+  handleDoneTodo: PropTypes.func.isRequired,
+  startEditTodo: PropTypes.func.isRequired,
+  deleteTodo: PropTypes.func.isRequired
 }
 
 export default TaskList
